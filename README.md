@@ -1,7 +1,5 @@
-libshout-java-2.2.2
-=============
-
 Java libshout binding
+=============
 
 Requirements
 
