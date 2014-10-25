@@ -1,0 +1,10 @@
+/.settings
+/.project
+/.classpath
+/target/classes
+/target/maven-archiver
+/target/native
+/target/objs
+/target/surefire
+/target/surefire-reports
+/target/test-classes
