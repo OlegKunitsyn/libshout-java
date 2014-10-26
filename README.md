@@ -16,7 +16,7 @@ System.out.println(libshout.getVersion());
 Stream test.mp3 to local Icecast2 on http://localhost:8000/mymount
 
 ``` java
-byte[] buffer = new byte[BUFFER_SIZE];
+byte[] buffer = new byte[1024];
 InputStream mp3 = new BufferedInputStream(new FileInputStream(new File("test.mp3")));
 Libshout icecast = new Libshout();
 icecast.setHost("localhost");
