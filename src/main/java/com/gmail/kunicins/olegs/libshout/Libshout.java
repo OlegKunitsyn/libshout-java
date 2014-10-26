@@ -9,32 +9,34 @@ public class Libshout implements AutoCloseable {
 		} catch (UnsatisfiedLinkError e) {
 			System.load(System.getProperty("user.dir") + "/target/libshout-java.so");
 		}
-    }
+	}
 	private static final int SUCCESS = 0;
 	private static final int CONNECTED = -7;
 	private int instance;
-	
+
 	public static final int FORMAT_OGG = 0;
 	public static final int FORMAT_MP3 = 1;
 	public static final int PROTOCOL_HTTP = 0;
 	public static final int PROTOCOL_XAUDIOCAST = 1;
 	public static final int PROTOCOL_ICY = 2;
-	public static final String INFO_BITRATE	= "bitrate";
+	public static final String INFO_BITRATE = "bitrate";
 	public static final String INFO_SAMPLERATE = "samplerate";
 	public static final String INFO_CHANNELS = "channels";
 	public static final String INFO_QUALITY = "quality";
-	
+
 	/**
 	 * Initialize the library
+	 * 
 	 * @throws IOException
 	 */
 	public Libshout() throws IOException {
 		shout_init();
 		this.instance = shout_new();
 	}
-	
+
 	/**
 	 * Open connection to Icecast. All parameters must already be set
+	 * 
 	 * @throws IOException
 	 */
 	public void open() throws IOException {
@@ -42,7 +44,7 @@ public class Libshout implements AutoCloseable {
 			throw new IOException(shout_get_error(this.instance));
 		}
 	}
-	
+
 	/**
 	 * Close connection to Icecast
 	 */
@@ -52,17 +54,19 @@ public class Libshout implements AutoCloseable {
 		}
 		// shout_shutdown();
 	}
-	
+
 	/**
 	 * Major, minor, and patch levels
+	 * 
 	 * @return
 	 */
 	public String getVersion() {
 		return shout_version(0, 0, 0);
 	}
-	
+
 	/**
 	 * Set Icecast host
+	 * 
 	 * @param host
 	 * @throws IOException
 	 */
@@ -71,17 +75,19 @@ public class Libshout implements AutoCloseable {
 			throw new IOException(shout_get_error(this.instance));
 		}
 	}
-	
+
 	/**
 	 * Get Icecast host
+	 * 
 	 * @return
 	 */
 	public String getHost() {
 		return shout_get_host(this.instance);
 	}
-	
+
 	/**
 	 * Set Icecast protocol
+	 * 
 	 * @param protocol
 	 * @throws IOException
 	 */
@@ -93,14 +99,16 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Get Icecast protocol
+	 * 
 	 * @return
 	 */
 	public int getProtocol() {
 		return shout_get_protocol(this.instance);
 	}
-	
+
 	/**
 	 * Set Icecast port
+	 * 
 	 * @param port
 	 * @throws IOException
 	 */
@@ -109,17 +117,19 @@ public class Libshout implements AutoCloseable {
 			throw new IOException(shout_get_error(this.instance));
 		}
 	}
-	
+
 	/**
 	 * Get Icecast port
+	 * 
 	 * @return
 	 */
 	public int getPort() {
 		return shout_get_port(this.instance);
 	}
-	
+
 	/**
 	 * Set Icecast password
+	 * 
 	 * @param password
 	 * @throws IOException
 	 */
@@ -128,17 +138,19 @@ public class Libshout implements AutoCloseable {
 			throw new IOException(shout_get_error(this.instance));
 		}
 	}
-	
+
 	/**
 	 * Get Icecast password
+	 * 
 	 * @return
 	 */
 	public String getPassword() {
 		return shout_get_password(this.instance);
 	}
-	
+
 	/**
 	 * Set Icecast mount
+	 * 
 	 * @param mount
 	 * @throws IOException
 	 */
@@ -147,17 +159,19 @@ public class Libshout implements AutoCloseable {
 			throw new IOException(shout_get_error(this.instance));
 		}
 	}
-	
+
 	/**
 	 * Get Icecast mount
+	 * 
 	 * @return
 	 */
 	public String getMount() {
 		return shout_get_mount(this.instance);
 	}
-	
+
 	/**
 	 * Set format parameter
+	 * 
 	 * @param format
 	 * @throws IOException
 	 */
@@ -166,17 +180,19 @@ public class Libshout implements AutoCloseable {
 			throw new IOException(shout_get_error(this.instance));
 		}
 	}
-	
+
 	/**
 	 * Get format parameter
+	 * 
 	 * @return
 	 */
 	public int getFormat() {
 		return shout_get_format(this.instance);
 	}
-	
+
 	/**
 	 * Send data to Icecast, parsing it for format specific timing info
+	 * 
 	 * @param data
 	 * @param length
 	 * @throws IOException
@@ -187,9 +203,10 @@ public class Libshout implements AutoCloseable {
 		}
 		shout_sync(this.instance);
 	}
-	
+
 	/**
 	 * Set name parameter
+	 * 
 	 * @param name
 	 * @throws IOException
 	 */
@@ -198,17 +215,19 @@ public class Libshout implements AutoCloseable {
 			throw new IOException(shout_get_error(this.instance));
 		}
 	}
-	
+
 	/**
 	 * Get name parameter
+	 * 
 	 * @return
 	 */
 	public String getName() {
 		return shout_get_name(this.instance);
 	}
-	
+
 	/**
 	 * Set url parameter
+	 * 
 	 * @param url
 	 * @throws IOException
 	 */
@@ -217,17 +236,19 @@ public class Libshout implements AutoCloseable {
 			throw new IOException(shout_get_error(this.instance));
 		}
 	}
-	
+
 	/**
 	 * Get url parameter
+	 * 
 	 * @return
 	 */
 	public String getUrl() {
 		return shout_get_url(this.instance);
 	}
-	
+
 	/**
 	 * Set genre parameter
+	 * 
 	 * @param genre
 	 * @throws IOException
 	 */
@@ -236,17 +257,19 @@ public class Libshout implements AutoCloseable {
 			throw new IOException(shout_get_error(this.instance));
 		}
 	}
-	
+
 	/**
 	 * Get genre parameter
+	 * 
 	 * @return
 	 */
 	public String getGenre() {
 		return shout_get_genre(this.instance);
 	}
-	
+
 	/**
 	 * Set Icecast username
+	 * 
 	 * @param username
 	 * @throws IOException
 	 */
@@ -255,17 +278,19 @@ public class Libshout implements AutoCloseable {
 			throw new IOException(shout_get_error(this.instance));
 		}
 	}
-	
+
 	/**
 	 * Get Icecast username
+	 * 
 	 * @return
 	 */
 	public String getUser() {
 		return shout_get_user(this.instance);
 	}
-	
+
 	/**
 	 * Get Icecast agent
+	 * 
 	 * @param agent
 	 * @throws IOException
 	 */
@@ -274,17 +299,19 @@ public class Libshout implements AutoCloseable {
 			throw new IOException(shout_get_error(this.instance));
 		}
 	}
-	
+
 	/**
 	 * Get Icecast agent
+	 * 
 	 * @return
 	 */
 	public String getAgent() {
 		return shout_get_agent(this.instance);
 	}
-	
+
 	/**
 	 * Set description parameter
+	 * 
 	 * @param description
 	 * @throws IOException
 	 */
@@ -293,17 +320,19 @@ public class Libshout implements AutoCloseable {
 			throw new IOException(shout_get_error(this.instance));
 		}
 	}
-	
+
 	/**
 	 * Get description parameter
+	 * 
 	 * @return
 	 */
 	public String getDescription() {
 		return shout_get_description(this.instance);
 	}
-	
+
 	/**
 	 * Set Icecast dumpfile
+	 * 
 	 * @param dumpfile
 	 * @throws IOException
 	 */
@@ -312,17 +341,19 @@ public class Libshout implements AutoCloseable {
 			throw new IOException(shout_get_error(this.instance));
 		}
 	}
-	
+
 	/**
 	 * Get Icecast dumpfile
+	 * 
 	 * @return
 	 */
 	public String getDumpfile() {
 		return shout_get_dumpfile(this.instance);
 	}
-	
+
 	/**
 	 * Set info parameter
+	 * 
 	 * @param key
 	 * @param value
 	 * @throws IOException
@@ -332,18 +363,20 @@ public class Libshout implements AutoCloseable {
 			throw new IOException(shout_get_error(this.instance));
 		}
 	}
-	
+
 	/**
 	 * Get info parameter
+	 * 
 	 * @param key
 	 * @return
 	 */
 	public String getInfo(String key) {
 		return shout_get_audio_info(this.instance, key);
 	}
-	
+
 	/**
 	 * Set MP3 meta parameter
+	 * 
 	 * @param key
 	 * @param value
 	 * @throws IOException
@@ -357,17 +390,19 @@ public class Libshout implements AutoCloseable {
 			throw new IOException(shout_get_error(this.instance));
 		}
 	}
-	
+
 	/**
 	 * Connection to Icecast established
+	 * 
 	 * @return
 	 */
 	public boolean isConnected() {
 		return shout_get_connected(this.instance) == CONNECTED ? true : false;
 	}
-	
+
 	/**
 	 * Set public parameter
+	 * 
 	 * @param isPublic
 	 * @throws IOException
 	 */
@@ -376,17 +411,19 @@ public class Libshout implements AutoCloseable {
 			throw new IOException(shout_get_error(this.instance));
 		}
 	}
-	
+
 	/**
 	 * Get public parameter
+	 * 
 	 * @return
 	 */
 	public boolean isPublic() {
 		return shout_get_public(this.instance) == 1 ? true : false;
 	}
-	
+
 	/**
 	 * Set Icacast to non-blocking mode. Must be set before open
+	 * 
 	 * @param isNonBlocking
 	 * @throws IOException
 	 */
@@ -395,17 +432,20 @@ public class Libshout implements AutoCloseable {
 			throw new IOException(shout_get_error(this.instance));
 		}
 	}
-	
+
 	/**
 	 * Icecast set to non-blocking mode?
+	 * 
 	 * @return
 	 */
 	public boolean isNonBlocking() {
 		return shout_get_nonblocking(this.instance) == 1 ? true : false;
 	}
-	
+
 	/**
-	 * Number of bytes currently on the write queue (only makes sense in nonblocking mode)
+	 * Number of bytes currently on the write queue (only makes sense in
+	 * nonblocking mode)
+	 * 
 	 * @return
 	 */
 	public int getQueueLen() {
@@ -414,12 +454,13 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Milliseconds caller should wait before sending again
+	 * 
 	 * @return
 	 */
 	public int getDelay() {
 		return shout_delay(this.instance);
 	}
-	
+
 	private native static void shout_init();
 	private native static void shout_shutdown();
 	private native static String shout_version(int major, int minor, int patch);
@@ -427,7 +468,7 @@ public class Libshout implements AutoCloseable {
 	private native static void shout_free(int instance);
 	private native static String shout_get_error(int instance);
 	private native static int shout_get_errno(int instance);
-	private native static int shout_get_connected(int instance);	
+	private native static int shout_get_connected(int instance);
 	private native static int shout_set_host(int instance, String host);
 	private native static String shout_get_host(int instance);
 	private native static int shout_set_port(int instance, int port);
