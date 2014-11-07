@@ -65,7 +65,7 @@
 				<executions>
                     <execution>
                         <id>javah</id>
-                        <phase>generate-sources</phase>
+                        <phase>compile</phase>
                         <goals>
                             <goal>javah</goal>
                             <goal>compile</goal>

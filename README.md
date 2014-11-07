@@ -13,7 +13,9 @@ Libshout libshout = new Libshout();
 System.out.println(libshout.getVersion());
 ```
 
-Stream test.mp3 to local Icecast2 on http://localhost:8000/mymount
+Streaming
+-----------
+of test.mp3 to local Icecast2 on http://localhost:8000/mymount
 
 ``` java
 byte[] buffer = new byte[1024];
@@ -36,3 +38,14 @@ mp3.close();
 ```
 
 [Demo](http://myfm.at)
+
+Compilation
+-----------
+on Debian Wheezy
+ 
+``` bash
+apt-get install git libshout3-dev gcc openjdk-7-jdk maven
+git clone https://github.com/OlegKunitsyn/libshout-java.git
+cd libshout-java
+mvn install
+```
