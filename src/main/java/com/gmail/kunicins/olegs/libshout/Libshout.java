@@ -12,7 +12,7 @@ public class Libshout implements AutoCloseable {
 	}
 	private static final int SUCCESS = 0;
 	private static final int CONNECTED = -7;
-	private int instance;
+	private long instance;
 
 	public static final int FORMAT_OGG = 0;
 	public static final int FORMAT_MP3 = 1;
@@ -382,7 +382,7 @@ public class Libshout implements AutoCloseable {
 	 * @throws IOException
 	 */
 	public void setMeta(String key, String value) throws IOException {
-		int instanceMeta = shout_metadata_new();
+		long instanceMeta = shout_metadata_new();
 		if (shout_set_metadata(this.instance, instanceMeta) != SUCCESS) {
 			throw new IOException(shout_get_error(this.instance));
 		}
@@ -464,52 +464,52 @@ public class Libshout implements AutoCloseable {
 	private native static void shout_init();
 	private native static void shout_shutdown();
 	private native static String shout_version(int major, int minor, int patch);
-	private native static int shout_new();
-	private native static void shout_free(int instance);
-	private native static String shout_get_error(int instance);
-	private native static int shout_get_errno(int instance);
-	private native static int shout_get_connected(int instance);
-	private native static int shout_set_host(int instance, String host);
-	private native static String shout_get_host(int instance);
-	private native static int shout_set_port(int instance, int port);
-	private native static int shout_get_port(int instance);
-	private native static int shout_set_password(int instance, String password);
-	private native static String shout_get_password(int instance);
-	private native static int shout_set_mount(int instance, String mount);
-	private native static String shout_get_mount(int instance);
-	private native static int shout_set_name(int instance, String name);
-	private native static String shout_get_name(int instance);
-	private native static int shout_set_url(int instance, String url);
-	private native static String shout_get_url(int instance);
-	private native static int shout_set_genre(int instance, String genre);
-	private native static String shout_get_genre(int instance);
-	private native static int shout_set_user(int instance, String username);
-	private native static String shout_get_user(int instance);
-	private native static int shout_set_agent(int instance, String agent);
-	private native static String shout_get_agent(int instance);
-	private native static int shout_set_description(int instance, String description);
-	private native static String shout_get_description(int instance);
-	private native static int shout_set_dumpfile(int instance, String dumpfile);
-	private native static String shout_get_dumpfile(int instance);
-	private native static int shout_set_audio_info(int instance, String key, String value);
-	private native static String shout_get_audio_info(int instance, String key);
-	private native static int shout_set_public(int instance, int isPublic);
-	private native static int shout_get_public(int instance);
-	private native static int shout_set_format(int instance, int format);
-	private native static int shout_get_format(int instance);
-	private native static int shout_set_protocol(int instance, int protocol);
-	private native static int shout_get_protocol(int instance);
-	private native static int shout_set_nonblocking(int instance, int isNonBlocking);
-	private native static int shout_get_nonblocking(int instance);
-	private native static int shout_open(int instance);
-	private native static int shout_close(int instance);
-	private native static int shout_send(int instance, byte[] data, int length);
-	private native static int shout_send_raw(int instance, byte[] data, int length);
-	private native static int shout_queuelen(int instance);
-	private native static void shout_sync(int instance);
-	private native static int shout_delay(int instance);
-	private native static int shout_metadata_new();
-	private native static int shout_set_metadata(int instance, int instanceMeta);
-	private native static int shout_metadata_add(int instanceMeta, String key, String value);
-	private native static void shout_metadata_free(int instanceMeta);
+	private native static long shout_new();
+	private native static void shout_free(long instance);
+	private native static String shout_get_error(long instance);
+	private native static int shout_get_errno(long instance);
+	private native static int shout_get_connected(long instance);
+	private native static int shout_set_host(long instance, String host);
+	private native static String shout_get_host(long instance);
+	private native static int shout_set_port(long instance, int port);
+	private native static int shout_get_port(long instance);
+	private native static int shout_set_password(long instance, String password);
+	private native static String shout_get_password(long instance);
+	private native static int shout_set_mount(long instance, String mount);
+	private native static String shout_get_mount(long instance);
+	private native static int shout_set_name(long instance, String name);
+	private native static String shout_get_name(long instance);
+	private native static int shout_set_url(long instance, String url);
+	private native static String shout_get_url(long instance);
+	private native static int shout_set_genre(long instance, String genre);
+	private native static String shout_get_genre(long instance);
+	private native static int shout_set_user(long instance, String username);
+	private native static String shout_get_user(long instance);
+	private native static int shout_set_agent(long instance, String agent);
+	private native static String shout_get_agent(long instance);
+	private native static int shout_set_description(long instance, String description);
+	private native static String shout_get_description(long instance);
+	private native static int shout_set_dumpfile(long instance, String dumpfile);
+	private native static String shout_get_dumpfile(long instance);
+	private native static int shout_set_audio_info(long instance, String key, String value);
+	private native static String shout_get_audio_info(long instance, String key);
+	private native static int shout_set_public(long instance, int isPublic);
+	private native static int shout_get_public(long instance);
+	private native static int shout_set_format(long instance, int format);
+	private native static int shout_get_format(long instance);
+	private native static int shout_set_protocol(long instance, int protocol);
+	private native static int shout_get_protocol(long instance);
+	private native static int shout_set_nonblocking(long instance, int isNonBlocking);
+	private native static int shout_get_nonblocking(long instance);
+	private native static int shout_open(long instance);
+	private native static int shout_close(long instance);
+	private native static int shout_send(long instance, byte[] data, int length);
+	private native static int shout_send_raw(long instance, byte[] data, int length);
+	private native static int shout_queuelen(long instance);
+	private native static void shout_sync(long instance);
+	private native static int shout_delay(long instance);
+	private native static long shout_metadata_new();
+	private native static int shout_set_metadata(long instance, long instanceMeta);
+	private native static int shout_metadata_add(long instanceMeta, String key, String value);
+	private native static void shout_metadata_free(long instanceMeta);
 }

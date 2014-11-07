@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <unistd.h>
 #include <jni.h>
 #include <shout/shout.h>
 #include <stdio.h>
@@ -28,7 +29,7 @@ JNIEXPORT void JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1sh
  * Signature: (III)Ljava/lang/String;
  */
 JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1version (JNIEnv *env, jclass class, jint x, jint y, jint z) {
-	return (*env)->NewStringUTF(env, shout_version((int *)x, (int *)y, (int *)z));
+	return (*env)->NewStringUTF(env, shout_version((void *)(intptr_t)x, (void *)(intptr_t)y, (void *)(intptr_t)z));
 }
 
 /*
@@ -36,8 +37,8 @@ JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_
  * Method:    shout_new
  * Signature: ()J
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1new (JNIEnv *env, jclass class) {
-	return (jint)shout_new();
+JNIEXPORT jlong JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1new (JNIEnv *env, jclass class) {
+	return (jlong)(intptr_t)shout_new();
 }
 
 /*
@@ -45,8 +46,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1ne
  * Method:    shout_free
  * Signature: (I)V
  */
-JNIEXPORT void JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1free (JNIEnv *env, jclass class, jint instance) {
-	shout_free((void *)instance);
+JNIEXPORT void JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1free (JNIEnv *env, jclass class, jlong instance) {
+	shout_free((void *)(intptr_t)instance);
 }
 
 /*
@@ -54,8 +55,8 @@ JNIEXPORT void JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1fr
  * Method:    shout_get_error
  * Signature: (I)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1error (JNIEnv *env, jclass class, jint instance) {
-	return (*env)->NewStringUTF(env, shout_get_error((void *)instance));
+JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1error (JNIEnv *env, jclass class, jlong instance) {
+	return (*env)->NewStringUTF(env, shout_get_error((void *)(intptr_t)instance));
 }
 
 /*
@@ -63,8 +64,8 @@ JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_
  * Method:    shout_get_errno
  * Signature: (I)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1errno (JNIEnv *env, jclass class, jint instance) {
-	return (jint)shout_get_errno((void *)instance);
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1errno (JNIEnv *env, jclass class, jlong instance) {
+	return (jint)shout_get_errno((void *)(intptr_t)instance);
 }
 
 /*
@@ -72,8 +73,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1ge
  * Method:    shout_get_connected
  * Signature: (I)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1connected (JNIEnv *env, jclass class, jint instance) {
-	return (jint)shout_get_connected((void *)instance);
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1connected (JNIEnv *env, jclass class, jlong instance) {
+	return (jint)shout_get_connected((void *)(intptr_t)instance);
 }
 
 /*
@@ -81,8 +82,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1ge
  * Method:    shout_set_host
  * Signature: (ILjava/lang/String;)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1host (JNIEnv *env, jclass class, jint instance, jstring host) {
-	return (jint)shout_set_host((void *)instance, (*env)->GetStringUTFChars(env, host, 0));
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1host (JNIEnv *env, jclass class, jlong instance, jstring host) {
+	return (jint)shout_set_host((void *)(intptr_t)instance, (*env)->GetStringUTFChars(env, host, 0));
 }
 
 /*
@@ -90,8 +91,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1se
  * Method:    shout_get_host
  * Signature: (I)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1host (JNIEnv *env, jclass class, jint instance) {
-	return (*env)->NewStringUTF(env, shout_get_host((void *)instance));
+JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1host (JNIEnv *env, jclass class, jlong instance) {
+	return (*env)->NewStringUTF(env, shout_get_host((void *)(intptr_t)instance));
 }
   
 /*
@@ -99,8 +100,8 @@ JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_
  * Method:    shout_set_port
  * Signature: (IS)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1port (JNIEnv *env, jclass class, jint instance, jint port) {
-	return (jint)shout_set_port((void *)instance, (unsigned int)port);
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1port (JNIEnv *env, jclass class, jlong instance, jint port) {
+	return (jint)shout_set_port((void *)(intptr_t)instance, (unsigned int)port);
 }
 
 /*
@@ -108,8 +109,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1se
  * Method:    shout_get_port
  * Signature: (I)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1port (JNIEnv *env, jclass class, jint instance) {
-	return (jint)shout_get_port((void *)instance);
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1port (JNIEnv *env, jclass class, jlong instance) {
+	return (jint)shout_get_port((void *)(intptr_t)instance);
 }
 
 /*
@@ -117,8 +118,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1ge
  * Method:    shout_set_password
  * Signature: (ILjava/lang/String;)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1password (JNIEnv *env, jclass class, jint instance, jstring password) {
-	return (jint)shout_set_password((void *)instance, (*env)->GetStringUTFChars(env, password, 0));
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1password (JNIEnv *env, jclass class, jlong instance, jstring password) {
+	return (jint)shout_set_password((void *)(intptr_t)instance, (*env)->GetStringUTFChars(env, password, 0));
 }
   
 /*
@@ -126,8 +127,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1se
  * Method:    shout_get_password
  * Signature: (I)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1password (JNIEnv *env, jclass class, jint instance) {
-	return (*env)->NewStringUTF(env, shout_get_password((void *)instance));
+JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1password (JNIEnv *env, jclass class, jlong instance) {
+	return (*env)->NewStringUTF(env, shout_get_password((void *)(intptr_t)instance));
 }  
 
 /*
@@ -135,8 +136,8 @@ JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_
  * Method:    shout_set_mount
  * Signature: (ILjava/lang/String;)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1mount (JNIEnv *env, jclass class, jint instance, jstring mount) {
-	return (jint)shout_set_mount((void *)instance, (*env)->GetStringUTFChars(env, mount, 0));
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1mount (JNIEnv *env, jclass class, jlong instance, jstring mount) {
+	return (jint)shout_set_mount((void *)(intptr_t)instance, (*env)->GetStringUTFChars(env, mount, 0));
 }
 
 /*
@@ -144,8 +145,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1se
  * Method:    shout_get_mount
  * Signature: (I)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1mount (JNIEnv *env, jclass class, jint instance) {
-	return (*env)->NewStringUTF(env, shout_get_mount((void *)instance));
+JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1mount (JNIEnv *env, jclass class, jlong instance) {
+	return (*env)->NewStringUTF(env, shout_get_mount((void *)(intptr_t)instance));
 }
   
 /*
@@ -153,8 +154,8 @@ JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_
  * Method:    shout_set_name
  * Signature: (ILjava/lang/String;)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1name (JNIEnv *env, jclass class, jint instance, jstring name) {
-	return (jint)shout_set_name((void *)instance, (*env)->GetStringUTFChars(env, name, 0));
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1name (JNIEnv *env, jclass class, jlong instance, jstring name) {
+	return (jint)shout_set_name((void *)(intptr_t)instance, (*env)->GetStringUTFChars(env, name, 0));
 }
 
 /*
@@ -162,8 +163,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1se
  * Method:    shout_get_name
  * Signature: (I)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1name (JNIEnv *env, jclass class, jint instance) {
-	return (*env)->NewStringUTF(env, shout_get_name((void *)instance));
+JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1name (JNIEnv *env, jclass class, jlong instance) {
+	return (*env)->NewStringUTF(env, shout_get_name((void *)(intptr_t)instance));
 }
 
 /*
@@ -171,8 +172,8 @@ JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_
  * Method:    shout_set_url
  * Signature: (ILjava/lang/String;)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1url (JNIEnv *env, jclass class, jint instance, jstring url) {
-	return (jint)shout_set_url((void *)instance, (*env)->GetStringUTFChars(env, url, 0));
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1url (JNIEnv *env, jclass class, jlong instance, jstring url) {
+	return (jint)shout_set_url((void *)(intptr_t)instance, (*env)->GetStringUTFChars(env, url, 0));
 }
 
 /*
@@ -180,8 +181,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1se
  * Method:    shout_get_url
  * Signature: (I)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1url (JNIEnv *env, jclass class, jint instance) {
-	return (*env)->NewStringUTF(env, shout_get_url((void *)instance));
+JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1url (JNIEnv *env, jclass class, jlong instance) {
+	return (*env)->NewStringUTF(env, shout_get_url((void *)(intptr_t)instance));
 }
 
 /*
@@ -189,8 +190,8 @@ JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_
  * Method:    shout_set_genre
  * Signature: (ILjava/lang/String;)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1genre (JNIEnv *env, jclass class, jint instance, jstring genre) {
-	return (jint)shout_set_genre((void *)instance, (*env)->GetStringUTFChars(env, genre, 0));
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1genre (JNIEnv *env, jclass class, jlong instance, jstring genre) {
+	return (jint)shout_set_genre((void *)(intptr_t)instance, (*env)->GetStringUTFChars(env, genre, 0));
 }
 
 /*
@@ -198,8 +199,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1se
  * Method:    shout_get_genre
  * Signature: (I)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1genre (JNIEnv *env, jclass class, jint instance) {
-	return (*env)->NewStringUTF(env, shout_get_genre((void *)instance));
+JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1genre (JNIEnv *env, jclass class, jlong instance) {
+	return (*env)->NewStringUTF(env, shout_get_genre((void *)(intptr_t)instance));
 }
 
 /*
@@ -207,8 +208,8 @@ JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_
  * Method:    shout_set_user
  * Signature: (ILjava/lang/String;)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1user (JNIEnv *env, jclass class, jint instance, jstring user) {
-	return (jint)shout_set_user((void *)instance, (*env)->GetStringUTFChars(env, user, 0));
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1user (JNIEnv *env, jclass class, jlong instance, jstring user) {
+	return (jint)shout_set_user((void *)(intptr_t)instance, (*env)->GetStringUTFChars(env, user, 0));
 }
 
 /*
@@ -216,8 +217,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1se
  * Method:    shout_get_user
  * Signature: (I)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1user (JNIEnv *env, jclass class, jint instance) {
-	return (*env)->NewStringUTF(env, shout_get_user((void *)instance));
+JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1user (JNIEnv *env, jclass class, jlong instance) {
+	return (*env)->NewStringUTF(env, shout_get_user((void *)(intptr_t)instance));
 }
 
 /*
@@ -225,8 +226,8 @@ JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_
  * Method:    shout_set_agent
  * Signature: (ILjava/lang/String;)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1agent (JNIEnv *env, jclass class, jint instance, jstring agent) {
-	return (jint)shout_set_agent((void *)instance, (*env)->GetStringUTFChars(env, agent, 0));
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1agent (JNIEnv *env, jclass class, jlong instance, jstring agent) {
+	return (jint)shout_set_agent((void *)(intptr_t)instance, (*env)->GetStringUTFChars(env, agent, 0));
 }
 
 /*
@@ -234,8 +235,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1se
  * Method:    shout_get_agent
  * Signature: (I)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1agent (JNIEnv *env, jclass class, jint instance) {
-	return (*env)->NewStringUTF(env, shout_get_agent((void *)instance));
+JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1agent (JNIEnv *env, jclass class, jlong instance) {
+	return (*env)->NewStringUTF(env, shout_get_agent((void *)(intptr_t)instance));
 }
 
 /*
@@ -243,8 +244,8 @@ JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_
  * Method:    shout_set_description
  * Signature: (ILjava/lang/String;)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1description (JNIEnv *env, jclass class, jint instance, jstring description) {
-	return (jint)shout_set_description((void *)instance, (*env)->GetStringUTFChars(env, description, 0));
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1description (JNIEnv *env, jclass class, jlong instance, jstring description) {
+	return (jint)shout_set_description((void *)(intptr_t)instance, (*env)->GetStringUTFChars(env, description, 0));
 }
 
 /*
@@ -252,8 +253,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1se
  * Method:    shout_get_description
  * Signature: (I)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1description (JNIEnv *env, jclass class, jint instance) {
-	return (*env)->NewStringUTF(env, shout_get_description((void *)instance));
+JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1description (JNIEnv *env, jclass class, jlong instance) {
+	return (*env)->NewStringUTF(env, shout_get_description((void *)(intptr_t)instance));
 }
 
 /*
@@ -261,8 +262,8 @@ JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_
  * Method:    shout_set_dumpfile
  * Signature: (ILjava/lang/String;)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1dumpfile (JNIEnv *env, jclass class, jint instance, jstring dumpfile) {
-	return (jint)shout_set_dumpfile((void *)instance, (*env)->GetStringUTFChars(env, dumpfile, 0));
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1dumpfile (JNIEnv *env, jclass class, jlong instance, jstring dumpfile) {
+	return (jint)shout_set_dumpfile((void *)(intptr_t)instance, (*env)->GetStringUTFChars(env, dumpfile, 0));
 }
 
 /*
@@ -270,8 +271,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1se
  * Method:    shout_get_dumpfile
  * Signature: (I)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1dumpfile (JNIEnv *env, jclass class, jint instance) {
-	return (*env)->NewStringUTF(env, shout_get_dumpfile((void *)instance));
+JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1dumpfile (JNIEnv *env, jclass class, jlong instance) {
+	return (*env)->NewStringUTF(env, shout_get_dumpfile((void *)(intptr_t)instance));
 }
 
 /*
@@ -279,8 +280,8 @@ JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_
  * Method:    shout_set_audio_info
  * Signature: (ILjava/lang/String;Ljava/lang/String;)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1audio_1info (JNIEnv *env, jclass class, jint instance, jstring key, jstring value) {
-	return (jint)shout_set_audio_info((void *)instance, (*env)->GetStringUTFChars(env, key, 0), (*env)->GetStringUTFChars(env, value, 0));
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1audio_1info (JNIEnv *env, jclass class, jlong instance, jstring key, jstring value) {
+	return (jint)shout_set_audio_info((void *)(intptr_t)instance, (*env)->GetStringUTFChars(env, key, 0), (*env)->GetStringUTFChars(env, value, 0));
 }
 
 /*
@@ -288,8 +289,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1se
  * Method:    shout_get_audio_info
  * Signature: (ILjava/lang/String;)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1audio_1info (JNIEnv *env, jclass class, jint instance, jstring key) {
-	return (*env)->NewStringUTF(env, shout_get_audio_info((void *)instance, (*env)->GetStringUTFChars(env, key, 0)));
+JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1audio_1info (JNIEnv *env, jclass class, jlong instance, jstring key) {
+	return (*env)->NewStringUTF(env, shout_get_audio_info((void *)(intptr_t)instance, (*env)->GetStringUTFChars(env, key, 0)));
 }
 
 /*
@@ -297,8 +298,8 @@ JNIEXPORT jstring JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_
  * Method:    shout_set_public
  * Signature: (II)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1public (JNIEnv *env, jclass class, jint instance, jint public) {
-	return (jint)shout_set_public((void *)instance, (int)public);
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1public (JNIEnv *env, jclass class, jlong instance, jint public) {
+	return (jint)shout_set_public((void *)(intptr_t)instance, (int)public);
 }
 
 /*
@@ -306,8 +307,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1se
  * Method:    shout_get_public
  * Signature: (I)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1public (JNIEnv *env, jclass class, jint instance) {
-	return (jint)shout_get_public((void *)instance);
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1public (JNIEnv *env, jclass class, jlong instance) {
+	return (jint)shout_get_public((void *)(intptr_t)instance);
 }
 
 /*
@@ -315,8 +316,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1ge
  * Method:    shout_set_format
  * Signature: (II)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1format (JNIEnv *env, jclass class, jint instance, jint format) {
-	return (jint)shout_set_format((void *)instance, (unsigned int)format);
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1format (JNIEnv *env, jclass class, jlong instance, jint format) {
+	return (jint)shout_set_format((void *)(intptr_t)instance, (unsigned int)format);
 }
 
 /*
@@ -324,8 +325,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1se
  * Method:    shout_get_format
  * Signature: (I)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1format (JNIEnv *env, jclass class, jint instance) {
-	return (jint)shout_get_format((void *)instance);
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1format (JNIEnv *env, jclass class, jlong instance) {
+	return (jint)shout_get_format((void *)(intptr_t)instance);
 }
 
 /*
@@ -333,8 +334,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1ge
  * Method:    shout_set_protocol
  * Signature: (II)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1protocol (JNIEnv *env, jclass class, jint instance, jint protocol) {
-	return (jint)shout_set_protocol((void *)instance, (unsigned int)protocol);
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1protocol (JNIEnv *env, jclass class, jlong instance, jint protocol) {
+	return (jint)shout_set_protocol((void *)(intptr_t)instance, (unsigned int)protocol);
 }
 
 /*
@@ -342,8 +343,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1se
  * Method:    shout_get_protocol
  * Signature: (I)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1protocol (JNIEnv *env, jclass class, jint instance) {
-	return (jint)shout_get_protocol((void *)instance);
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1protocol (JNIEnv *env, jclass class, jlong instance) {
+	return (jint)shout_get_protocol((void *)(intptr_t)instance);
 }
 
 /*
@@ -351,8 +352,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1ge
  * Method:    shout_set_nonblocking
  * Signature: (II)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1nonblocking (JNIEnv *env, jclass class, jint instance, jint nonblocking) {
-	return (jint)shout_set_nonblocking((void *)instance, (int)nonblocking);
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1nonblocking (JNIEnv *env, jclass class, jlong instance, jint nonblocking) {
+	return (jint)shout_set_nonblocking((void *)(intptr_t)instance, (int)nonblocking);
 }
 
 /*
@@ -360,8 +361,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1se
  * Method:    shout_get_nonblocking
  * Signature: (I)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1nonblocking (JNIEnv *env, jclass class, jint instance) {
-	return (jint)shout_get_nonblocking((void *)instance);
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1get_1nonblocking (JNIEnv *env, jclass class, jlong instance) {
+	return (jint)shout_get_nonblocking((void *)(intptr_t)instance);
 }
 
 /*
@@ -369,8 +370,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1ge
  * Method:    shout_open
  * Signature: (I)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1open (JNIEnv *env, jclass class, jint instance) {
-	return (jint)shout_open((void *)instance);
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1open (JNIEnv *env, jclass class, jlong instance) {
+	return (jint)shout_open((void *)(intptr_t)instance);
 }
 
 /*
@@ -378,8 +379,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1op
  * Method:    shout_close
  * Signature: (I)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1close (JNIEnv *env, jclass class, jint instance) {
-	return (jint)shout_close((void *)instance);
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1close (JNIEnv *env, jclass class, jlong instance) {
+	return (jint)shout_close((void *)(intptr_t)instance);
 }
 
 /*
@@ -387,11 +388,11 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1cl
  * Method:    shout_send
  * Signature: (I[CI)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1send (JNIEnv *env, jclass class, jint instance, jbyteArray array, jint len) {
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1send (JNIEnv *env, jclass class, jlong instance, jbyteArray array, jint len) {
 	jbyte *buffer;
 	int ret;
 	buffer = (*env)->GetByteArrayElements(env, array, 0);  
-	ret = shout_send((void *)instance, (unsigned char*)buffer, (int)len);
+	ret = shout_send((void *)(intptr_t)instance, (unsigned char*)buffer, (int)len);
 	(*env)->ReleaseByteArrayElements(env, array, buffer, 0);
 	return (jint)ret;
 }
@@ -401,11 +402,11 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1se
  * Method:    shout_send_raw
  * Signature: (I[BI)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1send_1raw (JNIEnv *env, jclass class, jint instance, jbyteArray array, jint len) {
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1send_1raw (JNIEnv *env, jclass class, jlong instance, jbyteArray array, jint len) {
 	jbyte *buffer;
 	int ret;
 	buffer = (*env)->GetByteArrayElements(env, array, 0);  
-	ret = shout_send_raw((void *)instance, (unsigned char*)buffer, (int)len);
+	ret = shout_send_raw((void *)(intptr_t)instance, (unsigned char*)buffer, (int)len);
 	(*env)->ReleaseByteArrayElements(env, array, buffer, 0);
 	return (jint)ret;
 }
@@ -415,8 +416,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1se
  * Method:    shout_queuelen
  * Signature: (I)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1queuelen (JNIEnv *env, jclass jclass, jint instance) {
-	return (jint)shout_queuelen((void *)instance);
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1queuelen (JNIEnv *env, jclass jclass, jlong instance) {
+	return (jint)shout_queuelen((void *)(intptr_t)instance);
 }
 
 /*
@@ -424,8 +425,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1qu
  * Method:    shout_sync
  * Signature: (I)V
  */
-JNIEXPORT void JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1sync (JNIEnv *env, jclass class, jint instance) {
-	shout_sync((void *)instance);
+JNIEXPORT void JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1sync (JNIEnv *env, jclass class, jlong instance) {
+	shout_sync((void *)(intptr_t)instance);
 }
 
 /*
@@ -433,8 +434,8 @@ JNIEXPORT void JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1sy
  * Method:    shout_delay
  * Signature: (I)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1delay (JNIEnv *env, jclass class, jint instance) {
-	return (jint)shout_delay((void *)instance);
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1delay (JNIEnv *env, jclass class, jlong instance) {
+	return (jint)shout_delay((void *)(intptr_t)instance);
 }
 
 /*
@@ -442,8 +443,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1de
  * Method:    shout_metadata_new
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1metadata_1new (JNIEnv *env, jclass class) {
-	return (jint)shout_metadata_new();
+JNIEXPORT jlong JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1metadata_1new (JNIEnv *env, jclass class) {
+	return (jlong)(intptr_t)shout_metadata_new();
 }
 
 /*
@@ -451,8 +452,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1me
  * Method:    shout_set_metadata
  * Signature: (II)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1metadata (JNIEnv *env, jclass class, jint instance, jint instanceMeta) {
-	return (jint)shout_set_metadata((void *)instance, (void *)instanceMeta);
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1set_1metadata (JNIEnv *env, jclass class, jlong instance, jlong instanceMeta) {
+	return (jint)shout_set_metadata((void *)(intptr_t)instance, (void *)(intptr_t)instanceMeta);
 }
 
 /*
@@ -460,8 +461,8 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1se
  * Method:    shout_metadata_add
  * Signature: (ILjava/lang/String;Ljava/lang/String;)I
  */
-JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1metadata_1add (JNIEnv *env, jclass class, jint instanceMeta, jstring key, jstring value) {
-	return (jint)shout_metadata_add((void *)instanceMeta, (*env)->GetStringUTFChars(env, key, 0), (*env)->GetStringUTFChars(env, value, 0));
+JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1metadata_1add (JNIEnv *env, jclass class, jlong instanceMeta, jstring key, jstring value) {
+	return (jint)shout_metadata_add((void *)(intptr_t)instanceMeta, (*env)->GetStringUTFChars(env, key, 0), (*env)->GetStringUTFChars(env, value, 0));
 }
 
 /*
@@ -469,6 +470,6 @@ JNIEXPORT jint JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1me
  * Method:    shout_metadata_free
  * Signature: (I)V
  */
-JNIEXPORT void JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1metadata_1free (JNIEnv *env, jclass class, jint instanceMeta) {
-	shout_metadata_free((void *)instanceMeta);
+JNIEXPORT void JNICALL Java_com_gmail_kunicins_olegs_libshout_Libshout_shout_1metadata_1free (JNIEnv *env, jclass class, jlong instanceMeta) {
+	shout_metadata_free((void *)(intptr_t)instanceMeta);
 }
