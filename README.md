@@ -49,3 +49,15 @@ git clone https://github.com/OlegKunitsyn/libshout-java.git
 cd libshout-java
 mvn install
 ```
+
+on CentOS 6.4
+ 
+``` bash
+yum install git libshout-devel gcc java-1.7.0-openjdk-devel
+wget --no-check-certificate https://raw.githubusercontent.com/monksy/centos-maven-install/master/maven-install.sh
+chmod +x maven-install.sh
+./maven-install.sh
+git clone https://github.com/OlegKunitsyn/libshout-java.git
+cd libshout-java
+mvn install
+```
