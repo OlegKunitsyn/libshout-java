@@ -61,3 +61,7 @@ git clone https://github.com/OlegKunitsyn/libshout-java.git
 cd libshout-java
 mvn install
 ```
+
+on Ubuntu, Windows, OpenSuse etc
+ 
+please commit your story
