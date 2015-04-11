@@ -50,7 +50,7 @@ cd libshout-java
 mvn install
 ```
 
-on CentOS 6.4
+on CentOS 6.6
  
 ``` bash
 yum install git libshout-devel gcc java-1.7.0-openjdk-devel
@@ -59,7 +59,7 @@ chmod +x maven-install.sh
 ./maven-install.sh
 git clone https://github.com/OlegKunitsyn/libshout-java.git
 cd libshout-java
-mvn install
+/usr/local/maven/bin/mvn install
 ```
 
 on Ubuntu, Windows, OpenSuse etc
