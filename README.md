@@ -3,8 +3,8 @@ Java libshout binding
 
 Requirements
 
-* Java 1.7
-* libshout 2.2.2
+* Java 1.7+
+* libshout 2.2+
 
 Target folder contains libshout-java.so ready for use on 32-bit Linux. Put it in the user.dir of your project.
 
@@ -41,7 +41,7 @@ mp3.close();
 
 Compilation
 -----------
-on Debian Wheezy
+on Debian Wheezy (libshout 2.2) and Jessie (libshout 2.3)
  
 ``` bash
 apt-get install git libshout3-dev gcc openjdk-7-jdk maven
