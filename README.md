@@ -50,13 +50,21 @@ cd libshout-java
 mvn install
 ```
 
-on CentOS 6.6
+on CentOS 6.6 and 7.1
  
 ``` bash
 yum install git libshout-devel gcc java-1.7.0-openjdk-devel
-wget --no-check-certificate https://raw.githubusercontent.com/monksy/centos-maven-install/master/maven-install.sh
-chmod +x maven-install.sh
-./maven-install.sh
+
+wget -O maven.tgz http://www.eu.apache.org/dist/maven/maven-3/3.1.1/binaries/apache-maven-3.1.1-bin.tar.gz
+mkdir -p maven
+tar xzf maven.tgz -C maven
+mkdir -p /usr/local/maven
+mv maven/apache-maven-3.1.1/* /usr/local/maven
+rm -f maven.tgz
+echo -e 'export M2_HOME=/usr/local/maven\nexport PATH=${M2_HOME}/bin:${PATH}' > /etc/profile.d/maven.sh
+source /etc/profile.d/maven.sh
+echo 'The maven version: ' `/usr/local/maven/bin/mvn -version` ' has been installed.'
+
 git clone https://github.com/OlegKunitsyn/libshout-java.git
 cd libshout-java
 /usr/local/maven/bin/mvn install
