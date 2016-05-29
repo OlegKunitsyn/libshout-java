@@ -50,7 +50,7 @@ cd libshout-java
 mvn install
 ```
 
-on CentOS 6.6 and 7.1
+on CentOS 6.6, 7.1, 7.2
  
 ``` bash
 yum install git libshout-devel gcc java-1.7.0-openjdk-devel
