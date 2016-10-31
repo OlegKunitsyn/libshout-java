@@ -44,6 +44,9 @@
 								<fileName>libshout.c</fileName>
 							</fileNames>
 						</source>
+						<source>
+							<directory>${java.home}/../include/darwin</directory>
+						</source>
 					</sources>
 					<compilerProvider>generic-classic</compilerProvider>
 					<compilerExecutable>gcc</compilerExecutable>
