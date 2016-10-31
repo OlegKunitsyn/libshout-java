@@ -41,7 +41,7 @@ mp3.close();
 
 Compilation
 -----------
-on Debian Wheezy (libshout 2.2) and Jessie (libshout 2.3)
+#### on Debian Wheezy (libshout 2.2) and Jessie (libshout 2.3)
  
 ``` bash
 apt-get install git libshout3-dev gcc openjdk-7-jdk maven
@@ -50,7 +50,7 @@ cd libshout-java
 mvn install
 ```
 
-on CentOS 6.6, 7.1, 7.2
+#### on CentOS 6.6, 7.1, 7.2
  
 ``` bash
 yum install git libshout-devel gcc java-1.7.0-openjdk-devel
@@ -70,6 +70,28 @@ cd libshout-java
 /usr/local/maven/bin/mvn install
 ```
 
-on Ubuntu, Windows, OpenSuse etc
+#### on Mac OS X 10.12.1
+``` bash
+
+### Prereqs
+# Install Homebrew
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+# Install Caskroom
+brew tap caskroom/cask
+# Install XCode CLI Tools (or XCode from the App Store)
+xcode-select --install
+# Install Java (found Caskroom to be the most reliable method)
+brew cask install java
+# Install Maven
+brew install maven
+
+### Build libshout-java
+git clone https://github.com/OlegKunitsyn/libshout-java.git
+cd libshout-java
+maven install
+
+```
+
+#### on Ubuntu, Windows, OpenSuse etc
  
 please commit your story
