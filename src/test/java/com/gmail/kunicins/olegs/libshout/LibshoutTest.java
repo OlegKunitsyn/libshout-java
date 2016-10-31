@@ -22,7 +22,9 @@ public class LibshoutTest {
 	
 	@Test
 	public void testVersion() {
-		assertEquals("2.2.2", this.libshout.getVersion());
+		String currentVersion = this.libshout.getVersion();
+		assertTrue("Expected Libshout version 2.2.2 or greater, but found version " + currentVersion,
+				"2.2.2".compareTo(currentVersion) <= 0);
 	}
 	
 	@Test
