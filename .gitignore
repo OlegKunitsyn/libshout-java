@@ -1,6 +1,8 @@
-/.settings
-/.project
-/.classpath
+*.settings
+*.project
+*.classpath
+*.idea
+*.iml
 /target/classes
 /target/maven-archiver
 /target/native
