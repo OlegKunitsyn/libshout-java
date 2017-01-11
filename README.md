@@ -92,6 +92,17 @@ maven install
 
 ```
 
-#### on Ubuntu, Windows, OpenSuse etc
+### on Ubuntu 16.04
+```bash
+# if you don't have jdk already installed please do install it first.
+# example apt-get install openjdk-8-jdk
+apt-get install git libshout3-dev gcc maven
+git clone https://github.com/OlegKunitsyn/libshout-java.git
+cd libshout-java
+mvn install
+mv target/libshout-java.64.so target/libshout-java.so
+```
+
+#### on Windows, OpenSuse etc
  
 please commit your story
