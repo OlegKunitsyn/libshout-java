@@ -41,10 +41,10 @@ mp3.close();
 
 Compilation
 -----------
-#### on Debian Wheezy (libshout 2.2) and Jessie (libshout 2.3)
+#### on Debian Wheezy (libshout 2.2), Jessie and Stretch (libshout 2.3)
  
 ``` bash
-apt-get install git libshout3-dev gcc openjdk-7-jdk maven
+apt-get install git libshout-dev gcc openjdk-8-jdk maven
 git clone https://github.com/OlegKunitsyn/libshout-java.git
 cd libshout-java
 mvn install
