@@ -98,18 +98,18 @@ please commit your story
 
 
 #### Docker instruction
-```
+``` bash
 # 1. Clone project
 git clone https://github.com/OlegKunitsyn/libshout-java.git
 cd libshout-java
 # 2. Build image
 docker build .
-You will see something like this: Successfully built a7bbaac75a68 < This is [docker image ID], we will use it in next step
+# -> You will see something like this: Successfully built a7bbaac75a68 < This is [docker image ID], we will use it in next step
 # Option. Run mvn install
 docker run [docker image ID] mvn install
 # Option. Run bash of ubuntu
+# A bash on ubuntu will appear. you can do something like in ubuntu 16.04LTS (64bit)
 docker run -it [docker image ID] /bin/bash
-A bash on ubuntu appear. From now you can do something like in ubuntu 16.04LTS (64bit)
 # Option. Advance. Mapping working directory vs directory in container
 # It mean you can modify files in your working directory. And run it in docker environment without rebuild
 docker run -it -v /path/to/libshout-java:/libshout-java/ [docker image ID]
