@@ -26,7 +26,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Initialize the library
-	 *
+	 * 
 	 * @throws IOException
 	 */
 	public Libshout() throws IOException {
@@ -36,7 +36,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Open connection to Icecast. All parameters must already be set
-	 *
+	 * 
 	 * @throws IOException
 	 */
 	public void open() throws IOException {
@@ -57,7 +57,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Major, minor, and patch levels
-	 *
+	 * 
 	 * @return
 	 */
 	public String getVersion() {
@@ -66,7 +66,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Set Icecast host
-	 *
+	 * 
 	 * @param host
 	 * @throws IOException
 	 */
@@ -78,7 +78,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Get Icecast host
-	 *
+	 * 
 	 * @return
 	 */
 	public String getHost() {
@@ -87,7 +87,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Set Icecast protocol
-	 *
+	 * 
 	 * @param protocol
 	 * @throws IOException
 	 */
@@ -99,7 +99,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Get Icecast protocol
-	 *
+	 * 
 	 * @return
 	 */
 	public int getProtocol() {
@@ -108,7 +108,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Set Icecast port
-	 *
+	 * 
 	 * @param port
 	 * @throws IOException
 	 */
@@ -120,7 +120,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Get Icecast port
-	 *
+	 * 
 	 * @return
 	 */
 	public int getPort() {
@@ -129,7 +129,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Set Icecast password
-	 *
+	 * 
 	 * @param password
 	 * @throws IOException
 	 */
@@ -141,7 +141,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Get Icecast password
-	 *
+	 * 
 	 * @return
 	 */
 	public String getPassword() {
@@ -150,7 +150,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Set Icecast mount
-	 *
+	 * 
 	 * @param mount
 	 * @throws IOException
 	 */
@@ -162,7 +162,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Get Icecast mount
-	 *
+	 * 
 	 * @return
 	 */
 	public String getMount() {
@@ -171,7 +171,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Set format parameter
-	 *
+	 * 
 	 * @param format
 	 * @throws IOException
 	 */
@@ -183,7 +183,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Get format parameter
-	 *
+	 * 
 	 * @return
 	 */
 	public int getFormat() {
@@ -192,7 +192,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Send data to Icecast, parsing it for format specific timing info
-	 *
+	 * 
 	 * @param data
 	 * @param length
 	 * @throws IOException
@@ -206,7 +206,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Set name parameter
-	 *
+	 * 
 	 * @param name
 	 * @throws IOException
 	 */
@@ -218,7 +218,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Get name parameter
-	 *
+	 * 
 	 * @return
 	 */
 	public String getName() {
@@ -227,7 +227,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Set url parameter
-	 *
+	 * 
 	 * @param url
 	 * @throws IOException
 	 */
@@ -239,7 +239,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Get url parameter
-	 *
+	 * 
 	 * @return
 	 */
 	public String getUrl() {
@@ -248,7 +248,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Set genre parameter
-	 *
+	 * 
 	 * @param genre
 	 * @throws IOException
 	 */
@@ -260,7 +260,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Get genre parameter
-	 *
+	 * 
 	 * @return
 	 */
 	public String getGenre() {
@@ -269,7 +269,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Set Icecast username
-	 *
+	 * 
 	 * @param username
 	 * @throws IOException
 	 */
@@ -281,7 +281,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Get Icecast username
-	 *
+	 * 
 	 * @return
 	 */
 	public String getUser() {
@@ -290,7 +290,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Get Icecast agent
-	 *
+	 * 
 	 * @param agent
 	 * @throws IOException
 	 */
@@ -302,7 +302,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Get Icecast agent
-	 *
+	 * 
 	 * @return
 	 */
 	public String getAgent() {
@@ -311,7 +311,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Set description parameter
-	 *
+	 * 
 	 * @param description
 	 * @throws IOException
 	 */
@@ -323,7 +323,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Get description parameter
-	 *
+	 * 
 	 * @return
 	 */
 	public String getDescription() {
@@ -332,7 +332,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Set Icecast dumpfile
-	 *
+	 * 
 	 * @param dumpfile
 	 * @throws IOException
 	 */
@@ -344,7 +344,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Get Icecast dumpfile
-	 *
+	 * 
 	 * @return
 	 */
 	public String getDumpfile() {
@@ -353,7 +353,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Set info parameter
-	 *
+	 * 
 	 * @param key
 	 * @param value
 	 * @throws IOException
@@ -366,7 +366,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Get info parameter
-	 *
+	 * 
 	 * @param key
 	 * @return
 	 */
@@ -422,7 +422,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Connection to Icecast established
-	 *
+	 * 
 	 * @return
 	 */
 	public boolean isConnected() {
@@ -431,7 +431,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Set public parameter
-	 *
+	 * 
 	 * @param isPublic
 	 * @throws IOException
 	 */
@@ -443,7 +443,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Get public parameter
-	 *
+	 * 
 	 * @return
 	 */
 	public boolean isPublic() {
@@ -452,7 +452,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Set Icacast to non-blocking mode. Must be set before open
-	 *
+	 * 
 	 * @param isNonBlocking
 	 * @throws IOException
 	 */
@@ -464,7 +464,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Icecast set to non-blocking mode?
-	 *
+	 * 
 	 * @return
 	 */
 	public boolean isNonBlocking() {
@@ -474,7 +474,7 @@ public class Libshout implements AutoCloseable {
 	/**
 	 * Number of bytes currently on the write queue (only makes sense in
 	 * nonblocking mode)
-	 *
+	 * 
 	 * @return
 	 */
 	public int getQueueLen() {
@@ -483,7 +483,7 @@ public class Libshout implements AutoCloseable {
 
 	/**
 	 * Milliseconds caller should wait before sending again
-	 *
+	 * 
 	 * @return
 	 */
 	public int getDelay() {
