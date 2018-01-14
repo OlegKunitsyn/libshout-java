@@ -42,6 +42,9 @@ public class Libshout implements AutoCloseable {
 	 *     instance = shout_new();
 	 *   </code>
 	 * </p>
+	 * <p>
+	 *   If the library has already been loaded (by a previous call to a constructor, it will <b>not</b> be reloaded.
+	 * </p>
 	 *
 	 * @param libraryPath The path of the libshout java shared library file, or null to use the default paths.
 	 * @throws IOException If an error occurs while initializing the library.
