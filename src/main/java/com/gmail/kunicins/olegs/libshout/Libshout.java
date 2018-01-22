@@ -1,14 +1,31 @@
 package com.gmail.kunicins.olegs.libshout;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class Libshout implements AutoCloseable {
+
+	private static final String[] LIBSHOUT_SEARCH_PATHS = {
+			System.getProperty("user.dir") + "/libshout-java.so",
+			System.getProperty("user.dir") + "/target/libshout-java.so"};
+
 	static {
-		try {
-			System.load(System.getProperty("user.dir") + "/libshout-java.so");
-		} catch (UnsatisfiedLinkError e) {
-			System.load(System.getProperty("user.dir") + "/target/libshout-java.so");
+
+		boolean libshoutFound = false;
+		for (String sharedObjectLocation : LIBSHOUT_SEARCH_PATHS) {
+			File libshoutSo = new File(sharedObjectLocation);
+			if (libshoutSo.exists()) {
+				libshoutFound = true;
+				System.load(sharedObjectLocation);
+				break;
+			}
 		}
+		if (!libshoutFound) {
+			throw new UnsatisfiedLinkError("Could not find path to Libshout shared object in possible paths: "
+					+ Arrays.toString(LIBSHOUT_SEARCH_PATHS));
+		}
+
 	}
 	private static final int SUCCESS = 0;
 	private static final int CONNECTED = -7;
