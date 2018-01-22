@@ -375,20 +375,49 @@ public class Libshout implements AutoCloseable {
 	}
 
 	/**
-	 * Set MP3 meta parameter
-	 * 
-	 * @param key
-	 * @param value
-	 * @throws IOException
+	 * Sets the MP3 stream metadata. <b>Deprecated.</b>
+	 * <p>
+	 *   <b>This method is deprecated, use {@link #setMetadata(String)} instead. The key parameter will be ignored.
+	 *   Calling this method is equivalent to running:</b><code>
+	 *     setMetadata(value);
+	 *   </code>
+	 * </p>
+	 *
+	 * @param key Ignored.
+	 * @param value The metadata of the stream to set.
+	 * @throws IOException If an error occurs when setting the metadata.
+	 * @deprecated Use {@link #setMetadata(String)} instead.
 	 */
-	public void setMeta(String key, String value) throws IOException {
+	public void setMeta(@SuppressWarnings("unused") String key, String value) throws IOException {
+		setMetadata(value);
+	}
+	
+	/**
+	 * Sets the MP3 stream metadata for the current playing song.
+	 * <p>
+	 *   This corresponds to the following native calls: <code>
+	 *
+	 *     long instanceMeta = shout_metadata_new();
+	 *     shout_metadata_add(instanceMeta, "song", metadata);
+	 *     shout_set_metadata(this.instance, instanceMeta);
+	 *     shout_metadata_free(instanceMeta);
+	 *   </code>
+	 * </p>
+	 * <p>
+	 *   The most common (unofficial) format for the metadata field is: <b>Artist - Title</b>.
+	 * </p>
+	 * @param metadata The metadata of the stream to set.
+	 * @throws IOException If an error occurs when setting the metadata.
+	 */
+	public void setMetadata(String metadata) throws IOException {
 		long instanceMeta = shout_metadata_new();
+		if (shout_metadata_add(instanceMeta, "song", metadata) != SUCCESS) {
+			throw new IOException(shout_get_error(this.instance));
+		}
 		if (shout_set_metadata(this.instance, instanceMeta) != SUCCESS) {
 			throw new IOException(shout_get_error(this.instance));
 		}
-		if (shout_metadata_add(instanceMeta, key, value) != SUCCESS) {
-			throw new IOException(shout_get_error(this.instance));
-		}
+		shout_metadata_free(instanceMeta);
 	}
 
 	/**
