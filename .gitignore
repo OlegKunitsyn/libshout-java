@@ -3,6 +3,9 @@
 *.project
 *.classpath
 
+# netbeans files
+nbproject/
+
 # intellij files
 .idea
 *.iml
