@@ -3,33 +3,18 @@ package com.gmail.kunicins.olegs.libshout;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.nio.file.Path;
 
 public class Libshout implements AutoCloseable {
-
+	
 	private static final String[] LIBSHOUT_SEARCH_PATHS = {
-			System.getProperty("user.dir") + "/libshout-java.so",
-			System.getProperty("user.dir") + "/target/libshout-java.so"};
+					System.getProperty("user.dir") + "/libshout-java.so",
+					System.getProperty("user.dir") + "/target/libshout-java.so"};
 
-	static {
-
-		boolean libshoutFound = false;
-		for (String sharedObjectLocation : LIBSHOUT_SEARCH_PATHS) {
-			File libshoutSo = new File(sharedObjectLocation);
-			if (libshoutSo.exists()) {
-				libshoutFound = true;
-				System.load(sharedObjectLocation);
-				break;
-			}
-		}
-		if (!libshoutFound) {
-			throw new UnsatisfiedLinkError("Could not find path to Libshout shared object in possible paths: "
-					+ Arrays.toString(LIBSHOUT_SEARCH_PATHS));
-		}
-
-	}
 	private static final int SUCCESS = 0;
 	private static final int CONNECTED = -7;
 	private long instance;
+	private static boolean loaded = false;
 
 	public static final int FORMAT_OGG = 0;
 	public static final int FORMAT_MP3 = 1;
@@ -42,11 +27,56 @@ public class Libshout implements AutoCloseable {
 	public static final String INFO_QUALITY = "quality";
 
 	/**
-	 * Initialize the library
-	 * 
-	 * @throws IOException
+	 * Initialize the library, using the default libshout shared library file paths.
+	 * <p>
+	 *   This method is equivalent to running <code>new Libshout(null);</code>.
+	 * </p>
+	 *
+	 * @throws IOException If an error occurs while initializing the library.
+	 * @see Libshout#Libshout(Path)
 	 */
 	public Libshout() throws IOException {
+		this(null);
+	}
+	
+	/**
+	 * Initialize the library, using the default libshout shared library file paths, or the default paths.
+	 * <p>
+	 *   This method is equivalent to loading the libshout shared library file, then running the following native calls: <code>
+	 *
+	 *     shout_init();
+	 *     instance = shout_new();
+	 *   </code>
+	 * </p>
+	 * <p>
+	 *   If the library has already been loaded (by a previous call to a constructor), it will <b>not</b> be reloaded.
+	 * </p>
+	 *
+	 * @param libraryPath The path of the libshout java shared library file, or null to use the default paths.
+	 * @throws IOException If an error occurs while initializing the library.
+	 * @throws UnsatisfiedLinkError If an error occurs while loading the libshout shared library.
+	 */
+	public Libshout(Path libraryPath) throws IOException {
+		if(!loaded) {
+			loaded = true;
+			if(libraryPath != null) {
+				System.load(libraryPath.toString());
+			} else {
+				boolean libshoutFound = false;
+				for (String sharedObjectLocation : LIBSHOUT_SEARCH_PATHS) {
+					File libshoutSo = new File(sharedObjectLocation);
+					if (libshoutSo.exists()) {
+						libshoutFound = true;
+						System.load(sharedObjectLocation);
+						break;
+					}
+				}
+				if (!libshoutFound) {
+					throw new UnsatisfiedLinkError("Could not find path to Libshout shared object in possible paths: "
+									+ Arrays.toString(LIBSHOUT_SEARCH_PATHS));
+				}
+			}
+		}
 		shout_init();
 		this.instance = shout_new();
 	}
@@ -399,7 +429,7 @@ public class Libshout implements AutoCloseable {
 	 *     setMetadata(value);
 	 *   </code>
 	 * </p>
-	 *
+	 * 
 	 * @param key Ignored.
 	 * @param value The metadata of the stream to set.
 	 * @throws IOException If an error occurs when setting the metadata.
