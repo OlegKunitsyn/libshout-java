@@ -1,12 +1,19 @@
+# eclipse files
 *.settings
 *.project
 *.classpath
-*.idea
+
+# intellij files
+.idea
 *.iml
-/target/classes
-/target/maven-archiver
-/target/native
-/target/objs
-/target/surefire
-/target/surefire-reports
-/target/test-classes
+
+# virtual machine crash logs
+hs_err_pid*
+
+# maven files
+target/
+
+# include releases
+!target/libshout-java.so
+!target/libshout-java.64.so
+!target/libshout-java-*.jar
