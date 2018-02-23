@@ -1,18 +1,20 @@
 package com.gmail.kunicins.olegs.libshout;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.nio.file.Path;
 
 public class Libshout implements AutoCloseable {
-	static {
-		try {
-			System.load(System.getProperty("user.dir") + "/libshout-java.so");
-		} catch (UnsatisfiedLinkError e) {
-			System.load(System.getProperty("user.dir") + "/target/libshout-java.so");
-		}
-	}
+	
+	private static final String[] LIBSHOUT_SEARCH_PATHS = {
+					System.getProperty("user.dir") + "/libshout-java.so",
+					System.getProperty("user.dir") + "/target/libshout-java.so"};
+
 	private static final int SUCCESS = 0;
 	private static final int CONNECTED = -7;
 	private long instance;
+	private static boolean loaded = false;
 
 	public static final int FORMAT_OGG = 0;
 	public static final int FORMAT_MP3 = 1;
@@ -25,11 +27,56 @@ public class Libshout implements AutoCloseable {
 	public static final String INFO_QUALITY = "quality";
 
 	/**
-	 * Initialize the library
-	 * 
-	 * @throws IOException
+	 * Initialize the library, using the default libshout shared library file paths.
+	 * <p>
+	 *   This method is equivalent to running <code>new Libshout(null);</code>.
+	 * </p>
+	 *
+	 * @throws IOException If an error occurs while initializing the library.
+	 * @see Libshout#Libshout(Path)
 	 */
 	public Libshout() throws IOException {
+		this(null);
+	}
+	
+	/**
+	 * Initialize the library, using the default libshout shared library file paths, or the default paths.
+	 * <p>
+	 *   This method is equivalent to loading the libshout shared library file, then running the following native calls: <code>
+	 *
+	 *     shout_init();
+	 *     instance = shout_new();
+	 *   </code>
+	 * </p>
+	 * <p>
+	 *   If the library has already been loaded (by a previous call to a constructor), it will <b>not</b> be reloaded.
+	 * </p>
+	 *
+	 * @param libraryPath The path of the libshout java shared library file, or null to use the default paths.
+	 * @throws IOException If an error occurs while initializing the library.
+	 * @throws UnsatisfiedLinkError If an error occurs while loading the libshout shared library.
+	 */
+	public Libshout(Path libraryPath) throws IOException {
+		if(!loaded) {
+			loaded = true;
+			if(libraryPath != null) {
+				System.load(libraryPath.toString());
+			} else {
+				boolean libshoutFound = false;
+				for (String sharedObjectLocation : LIBSHOUT_SEARCH_PATHS) {
+					File libshoutSo = new File(sharedObjectLocation);
+					if (libshoutSo.exists()) {
+						libshoutFound = true;
+						System.load(sharedObjectLocation);
+						break;
+					}
+				}
+				if (!libshoutFound) {
+					throw new UnsatisfiedLinkError("Could not find path to Libshout shared object in possible paths: "
+									+ Arrays.toString(LIBSHOUT_SEARCH_PATHS));
+				}
+			}
+		}
 		shout_init();
 		this.instance = shout_new();
 	}
@@ -375,20 +422,49 @@ public class Libshout implements AutoCloseable {
 	}
 
 	/**
-	 * Set MP3 meta parameter
+	 * Sets the MP3 stream metadata. <b>Deprecated.</b>
+	 * <p>
+	 *   <b>This method is deprecated, use {@link #setMetadata(String)} instead. The key parameter will be ignored.
+	 *   Calling this method is equivalent to running:</b><code>
+	 *     setMetadata(value);
+	 *   </code>
+	 * </p>
 	 * 
-	 * @param key
-	 * @param value
-	 * @throws IOException
+	 * @param key Ignored.
+	 * @param value The metadata of the stream to set.
+	 * @throws IOException If an error occurs when setting the metadata.
+	 * @deprecated Use {@link #setMetadata(String)} instead.
 	 */
-	public void setMeta(String key, String value) throws IOException {
+	public void setMeta(@SuppressWarnings("unused") String key, String value) throws IOException {
+		setMetadata(value);
+	}
+	
+	/**
+	 * Sets the MP3 stream metadata for the current playing song.
+	 * <p>
+	 *   This corresponds to the following native calls: <code>
+	 *
+	 *     long instanceMeta = shout_metadata_new();
+	 *     shout_metadata_add(instanceMeta, "song", metadata);
+	 *     shout_set_metadata(this.instance, instanceMeta);
+	 *     shout_metadata_free(instanceMeta);
+	 *   </code>
+	 * </p>
+	 * <p>
+	 *   The most common (unofficial) format for the metadata field is: <b>Artist - Title</b>.
+	 * </p>
+	 * @param metadata The metadata of the stream to set.
+	 * @throws IOException If an error occurs when setting the metadata.
+	 */
+	public void setMetadata(String metadata) throws IOException {
 		long instanceMeta = shout_metadata_new();
+		if (shout_metadata_add(instanceMeta, "song", metadata) != SUCCESS) {
+			throw new IOException(shout_get_error(this.instance));
+		}
 		if (shout_set_metadata(this.instance, instanceMeta) != SUCCESS) {
 			throw new IOException(shout_get_error(this.instance));
 		}
-		if (shout_metadata_add(instanceMeta, key, value) != SUCCESS) {
-			throw new IOException(shout_get_error(this.instance));
-		}
+		shout_metadata_free(instanceMeta);
 	}
 
 	/**
