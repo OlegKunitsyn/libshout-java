@@ -80,9 +80,11 @@ cd libshout-java
 brew tap caskroom/cask
 # Install XCode CLI Tools (or XCode from the App Store)
 xcode-select --install
-# Install Java (found Caskroom to be the most reliable method)
+# Install libshout-devel (for source code, shout.h etc.)
+brew install libshout
+# Install Java (if not already installed)
 brew cask install java
-# Install Maven
+# Install Maven (if not already installed)
 brew install maven
 
 ### Build libshout-java
