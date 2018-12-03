@@ -21,64 +21,45 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.5.1</version>
                 <configuration>
-                    <source>1.9</source>
-                    <target>1.9</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>native-maven-plugin</artifactId>
-                <version>1.0-alpha-9</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <javahOS>linux</javahOS>
-                    <javahOutputDirectory>${project.build.directory}/native</javahOutputDirectory>
-                    <javahClassNames>
-                        <javahClassName>com.gmail.kunicins.olegs.libshout.Libshout</javahClassName>
-                    </javahClassNames>
-                    <sources>
-                        <source>
-                            <directory>src/main/native</directory>
-                            <fileNames>
-                                <fileName>libshout.c</fileName>
-                            </fileNames>
-                        </source>
-                        <source>
-                            <directory>${java.home}/../include/darwin</directory>
-                        </source>
-                        <source>
-                            <directory>${java.home}/include</directory>
-                        </source>
-                        <source>
-                            <directory>${java.home}/include/linux</directory>
-                        </source>
-                    </sources>
-                    <compilerProvider>generic-classic</compilerProvider>
-                    <compilerExecutable>gcc</compilerExecutable>
-                    <compilerStartOptions>
-                        <compilerStartOption>-fpic</compilerStartOption>
-                        <compilerStartOption>-Wall</compilerStartOption>
-                    </compilerStartOptions>
-                    <linkerFinalName></linkerFinalName>
-                    <linkerOutputDirectory>target</linkerOutputDirectory>
-                    <linkerExecutable>gcc</linkerExecutable>
-                    <linkerStartOptions>
-                        <linkerStartOption>-shared</linkerStartOption>
-                        <linkerStartOption>-lshout</linkerStartOption>
-                    </linkerStartOptions>
-                    <linkerEndOptions>
-                        <linkerEndOption>-o ${project.build.directory}/${project.name}.so</linkerEndOption>
-                    </linkerEndOptions>
-                </configuration>
+                <artifactId>maven-antrun-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>javah</id>
+                        <id>native</id>
                         <phase>compile</phase>
+                        <configuration>
+                            <tasks>
+                                <exec executable="java">
+                                    <arg value="-version"/>
+                                </exec>
+                                <exec executable="gcc">
+                                    <arg value="-fpic"/>
+                                    <arg value="-Wall"/>
+                                    <arg value="-I${basedir}/src/main/native"/>
+                                    <arg value="-I${java.home}/../include/darwin"/>
+                                    <arg value="-I${java.home}/include"/>
+                                    <arg value="-I${java.home}/../include"/>
+                                    <arg value="-I${java.home}/include/linux"/>
+                                    <arg value="-I${java.home}/../include/linux"/>
+                                    <arg value="-o${project.build.directory}/libshout.o"/>
+                                    <arg value="-c"/>
+                                    <arg value="${basedir}/src/main/native/libshout.c"/>
+                                </exec>
+                                <exec executable="gcc">
+                                    <arg value="-shared"/>
+                                    <arg value="-lshout"/>
+                                    <arg value="-o${project.build.directory}/${project.name}-${project.version}.jar"/>
+                                    <arg value="${project.build.directory}/libshout.o"/>
+                                    <arg value="-o"/>
+                                    <arg value="${project.build.directory}/${project.name}.so"/>
+                                </exec>
+                            </tasks>
+                        </configuration>
                         <goals>
-                            <goal>javah</goal>
-                            <goal>compile</goal>
-                            <goal>link</goal>
+                            <goal>run</goal>
                         </goals>
                     </execution>
                 </executions>
