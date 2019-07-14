@@ -41,6 +41,16 @@ mp3.close();
 
 Compilation
 -----------
+#### on Debian Buster (libshout 2.4)
+ 
+``` bash
+apt-get install git libshout-dev gcc openjdk-11-jdk maven
+git clone https://github.com/OlegKunitsyn/libshout-java.git
+cd libshout-java
+git checkout origin/java11
+mvn install
+```
+
 #### on Debian Wheezy (libshout 2.2), Jessie and Stretch (libshout 2.3)
  
 ``` bash
