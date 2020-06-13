@@ -37,8 +37,6 @@ icecast.close();
 mp3.close();
 ```
 
-[Demo](http://myfm.at)
-
 Compilation
 -----------
 #### on Debian Wheezy (libshout 2.2), Jessie and Stretch (libshout 2.3)
